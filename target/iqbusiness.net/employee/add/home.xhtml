@@ -1,0 +1,317 @@
+<!DOCTYPE html
+[
+    <!ENTITY copy "&#169;"><!ENTITY times "&#215;"><!ENTITY nbsp "&#160;"><!ENTITY raquo "&#187;">
+]>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title>IQ Business Employee App</title>
+
+<!-- Bootstrap core CSS -->
+<link
+	href="#{request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link href="#{request.contextPath}/resources/css/heroic-features.css"
+	rel="stylesheet" />
+
+<!-- DataTables -->
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/plugins/datatables/dataTables.bootstrap.css" />
+	
+<!-- DataTables -->
+	<script
+		src="#{request.contextPath}/resources/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script
+		src="#{request.contextPath}/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
+		
+	<!-- Theme style -->
+	<link rel="stylesheet"
+		href="#{request.contextPath}/resources/vendor/dist/css/AdminLTE.min.css" />
+
+	<!-- Mpho Tabs style -->
+	<link rel="stylesheet"
+		href="#{request.contextPath}/resources/vendor/dist/css/mphotabs.css" />
+
+	<!-- Theme Colors -->
+	<link rel="stylesheet"
+		href="#{request.contextPath}/resources/vendor/dist/css/skins/skin-blue.css" />
+		
+		<!-- Font Awesome -->
+	<link rel="stylesheet"
+		href="#{request.contextPath}/resources/css/font-awesome-4.7.0/css/font-awesome.min.css" />	
+		
+		
+
+</h:head>
+
+<h:body>
+
+		<!-- Modal New Employee -->
+		<div id="modal-employee" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- form start -->
+					<h:form id="employeeFrm">
+						<div class="modal-header">
+						<!--  	<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>-->
+							<h4 class="modal-title">New Employee</h4>
+						</div>
+						<div class="modal-body">
+							<!-- general form elements -->
+							<div class="box-body">
+								<div class="form-group #{firstIt.valid ? '' :'has-error'}">
+									<label for="firstIt">First Name <label class="text-red">*</label></label>
+									<h:inputText required="true" binding="#{firstIt}"
+										requiredMessage="Please enter first name" class="form-control"
+										id="firstIt" immediate="true" a:placeholder="First Name"
+										autocomplete="off" value="#{newEmployee.firstName}">
+										<f:ajax event="keyup" render="firstMsg" />
+									</h:inputText>
+									<h:message id="firstMsg" for="firstIt" style="color:red;" />
+								</div>
+								<div class="form-group #{lastIt.valid?'':'has-error'}">
+									<label for="lastIt">Last Name <label class="text-red">*</label></label>
+									<h:inputText required="true" binding="#{lastIt}"
+										requiredMessage="Please enter last name"
+										class="form-control" id="lastIt" immediate="true"
+										a:placeholder="Last Name" autocomplete="off"
+										value="#{newEmployee.lastName}">
+										<f:ajax event="keyup" render="lastMsg" />
+									</h:inputText>
+									<h:message id="lastMsg" for="lastIt"
+										style="color:red;" />
+								</div>
+								<div class="form-group #{contactIt.valid?'':'has-error'}">
+									<label for="contactIt">Contact Number <label class="text-red">*</label></label>
+									<h:inputText required="true" binding="#{contactIt}"
+										requiredMessage="Please enter contact number"
+										onkeypress="if(event.which &gt; 46) if(event.which &lt; 48 || event.which &gt; 57 ) return false;"
+										class="form-control" id="contactIt" immediate="true"
+										pattern="^(0)[1-9][0-9]{8}"
+										a:placeholder="Contact Number" autocomplete="off"
+										value="#{newEmployee.contactNumber}">
+										<f:ajax event="keyup" render="contactMsg" />
+									</h:inputText>
+									<h:message id="contactMsg" for="contactIt"
+										style="color:red;" />
+								</div>
+								<div class="form-group #{addressIt.valid?'':'has-error'}">
+									<label for="addressIt">Addresss <label class="text-red">*</label></label>
+									<h:inputText required="true" binding="#{addressIt}"
+										requiredMessage="Please enter address"
+										class="form-control" id="addressIt" immediate="true"
+										a:placeholder="Address" autocomplete="off"
+										value="#{newEmployee.address}">
+										<f:ajax event="keyup" render="addressMsg" />
+									</h:inputText>
+									<h:message id="addressMsg" for="addressIt"
+										style="color:red;" />
+								</div>
+								<div class="form-group #{emailIt.valid?'':'has-error'}">
+									<label for="addressIt">Email Address <label class="text-red">*</label></label>
+									<h:inputText required="true" binding="#{emailIt}"
+										requiredMessage="Please enter email address"
+										a:pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"
+										class="form-control" id="emailIt" immediate="true"
+										a:data-error="Email is invalid"
+										a:placeholder="Email Address" autocomplete="off"
+										value="#{newEmployee.email}">
+										<f:ajax event="keyup" render="emailMsg" />
+									</h:inputText>
+									<h:message id="emailMsg" for="emailIt"
+										style="color:red;" />
+								</div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<div class="modal-footer">
+							<h:commandLink class="btn btn-success pull-right margin"
+								action="#{employeeController.registerEmployee}" update="employeeFrm">
+								<f:ajax execute="@all" render="@form" />
+								<span> <i class="fa fa-check-circle"></i> Submit
+								</span>
+							</h:commandLink>
+							<button type="button" class="btn btn-default margin"
+								data-dismiss="modal">
+								<i class="fa fa-times-circle"></i> Close
+							</button>
+						</div>
+					</h:form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+
+	
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="#">IQ Business</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link"
+						href="#{request.contextPath}/home.jsf">Home </a></li>
+					<li class="nav-item active"><a class="nav-link" href="#">Employee
+							List</a> <span class="sr-only">(current)</span></li>
+				<!--  	<li class="nav-item"><a class="nav-link" href="#">Contact</a>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+
+		<!-- Jumbotron Header -->
+		<header class="jumbotron my-4">
+			<p class="lead">On this page you can add, view and edit the
+				employees.</p>
+
+		</header>
+
+		<!-- Page Features -->
+		<div class="row text-center">
+			<h:dataTable id="employeeDt" var="row" value="#{employeeView.employeeList()}"
+				
+				class="table table-bordered table-striped">
+				<h:column>
+					<!-- column header -->
+					<f:facet name="header">Id</f:facet>
+					<!-- row record -->
+															#{row.employeeId}
+													</h:column>
+				<h:column>
+					<!-- column header -->
+					<f:facet name="header">First Name</f:facet>
+					<!-- row record -->
+															#{row.firstName}
+													</h:column>
+				<h:column>
+					<!-- column header -->
+					<f:facet name="header">Last Name</f:facet>
+					<!-- row record -->
+															#{row.lastName}
+													</h:column>
+				<h:column>
+					<!-- column header -->
+					<f:facet name="header">Address</f:facet>
+					<!-- row record -->
+					<span class="label"> #{row.address}</span>
+				</h:column>
+				<h:column>
+					<!-- column header -->
+					<f:facet name="header">Contact Number</f:facet>
+					<!-- row record -->
+															#{row.contactNumber}
+													</h:column>
+				<h:column>
+					<!-- column header -->
+					<f:facet name="header">Email Address</f:facet>
+					<!-- row record -->
+															#{row.email}
+													</h:column>
+				<h:column>
+					<f:facet name="header">Action</f:facet>
+					<h:form>
+						<!-- column header -->
+						<!-- row record -->
+
+						<a href="javascript:void(0)" class="uppercase"> <span
+							data-toggle="tooltip" title="View details of this e-service">
+								<h:commandLink class="btn btn-xs btn-info">
+									<i class="fa fa-search-plus" aria-hidden="true"></i>
+																		View
+																	</h:commandLink>
+						</span>
+						</a>
+						<a href="javascript:void(0)" class="uppercase"> <span
+							data-toggle="tooltip" title="View details of this e-service">
+								<h:commandLink class="btn btn-xs btn-warning">
+									<i class="fa fa-refresh" aria-hidden="true"></i>
+																		Update
+																	</h:commandLink> <!-- <a href="#addRole" class="btn btn-success pull-right margin" data-toggle="modal">Add Role</a> -->
+						</span>
+						</a>
+					</h:form>
+				</h:column>
+			</h:dataTable>
+
+			<h:form>
+				<button type="button" class="btn btn-sm btn-primary pull-left margin"
+											data-toggle="modal" data-target="#modal-employee">
+											<i class="fa fa-plus" aria-hidden="true"></i> Add Employee
+										</button>
+			</h:form>
+
+		</div>
+		<!-- /.row -->
+
+		<br />
+
+	</div>
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<strong>Copyright &copy; 2018 South Africa. All Rights
+				Reserved. Powered by <a href="https://iqbusiness.net"
+				target="_blank">IQ Business</a>
+			</strong>
+		</div>
+		<!-- /.container -->
+	</footer>
+
+	<!-- Bootstrap core JavaScript -->
+	<script
+		src="#{request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+	<script
+		src="#{request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+		$(function() {
+			//$("#attachmentDt").DataTable();
+			$('#employeeDt').DataTable({
+				"paging" : true,
+				"lengthChange" : true,
+				"searching" : true,
+				"ordering" : true,
+				"info" : true,
+				"autoWidth" : true
+			});
+		});
+	</script>
+
+</h:body>
+
+
+</html>

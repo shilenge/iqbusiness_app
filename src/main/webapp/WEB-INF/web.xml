@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>iqbusiness</display-name>
+  <context-param>
+    <param-name>com.sun.faces.defaultResourceMaxAge</param-name>
+    <param-value>2592000000</param-value>
+  </context-param>
+  <context-param>
+    <param-name>com.sun.faces.enableRestoreView11Compatibility</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.faces.WEBAPP_RESOURCES_DIRECTORY</param-name>
+    <param-value>/resources</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.jsf</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
+  </servlet-mapping>
+  <mime-mapping>
+    <extension>jsf</extension>
+    <mime-type>application/xhtml+xml</mime-type>
+  </mime-mapping>
+  <welcome-file-list>
+    <welcome-file>home.jsf</welcome-file>
+  </welcome-file-list>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error/error.jsf</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/error/error.jsf</location>
+  </error-page>
+  <error-page>
+    <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+    <location>/sessionExpired.jsf</location>
+  </error-page>
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <realm-name>iqbusiness</realm-name>
+    <form-login-config>
+      <form-login-page>/login/home.jsf</form-login-page>
+      <form-error-page>/error/error.jsf</form-error-page>
+    </form-login-config>
+  </login-config>
+  <session-config>
+    <cookie-config>
+      <http-only>true</http-only>
+    </cookie-config>
+  </session-config>
+</web-app>

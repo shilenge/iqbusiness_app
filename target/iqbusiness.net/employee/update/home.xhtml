@@ -1,0 +1,261 @@
+<!DOCTYPE html
+[
+    <!ENTITY copy "&#169;"><!ENTITY times "&#215;"><!ENTITY nbsp "&#160;"><!ENTITY raquo "&#187;">
+]>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title>IQ Business Employee App</title>
+
+<!-- Bootstrap core CSS -->
+<link
+	href="#{request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link href="#{request.contextPath}/resources/css/heroic-features.css"
+	rel="stylesheet" />
+
+<!-- DataTables -->
+<link rel="stylesheet"
+	href="#{request.contextPath}/resources/plugins/datatables/dataTables.bootstrap.css" />
+	
+<!-- DataTables -->
+	<script
+		src="#{request.contextPath}/resources/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script
+		src="#{request.contextPath}/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
+		
+	<!-- Theme style -->
+	<link rel="stylesheet"
+		href="#{request.contextPath}/resources/vendor/dist/css/AdminLTE.min.css" />
+
+	<!-- Mpho Tabs style -->
+	<link rel="stylesheet"
+		href="#{request.contextPath}/resources/vendor/dist/css/mphotabs.css" />
+
+	<!-- Theme Colors -->
+	<link rel="stylesheet"
+		href="#{request.contextPath}/resources/vendor/dist/css/skins/skin-blue.css" />
+		
+		<!-- Font Awesome -->
+	<link rel="stylesheet"
+		href="#{request.contextPath}/resources/css/font-awesome-4.7.0/css/font-awesome.min.css" />	
+		
+		
+
+</h:head>
+
+<h:body>
+
+		
+
+	
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="#">IQ Business</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link"
+						href="#{request.contextPath}/home.jsf">Home </a></li>
+					<li class="nav-item active"><a class="nav-link" href="#">Employee
+							List</a> <span class="sr-only">(current)</span></li>
+				<!--  	<li class="nav-item"><a class="nav-link" href="#">Contact</a>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+
+		<!-- Jumbotron Header -->
+		<header class="jumbotron my-4">
+			<p class="lead">On this page you can update  
+				employee details.</p>
+
+		</header>
+
+		<section class="content">
+					<!-- form start -->
+					<h:form id="updateFrm">
+						<!-- END.box -->
+						<div class="row">
+							<!-- NEW Col0 col -->
+							<div class="col-md-12">
+
+								<!-- general form elements -->
+								<div class="box box-solid">
+									<!-- new row start -->
+									<div class="row">
+										<div class="col-md-12"
+											style="border-bottom: #F0EFEF 1px solid;">
+											<a
+												href="#{request.contextPath}/employee/add/home.jsf"
+												class="btn btn-default btn-sm pull-right margin"><i
+												class="fa fa-arrow-left"></i> <span> Back to event
+													employees</span></a>
+													
+													
+										</div>
+										<br />
+										<!-- new col start -->
+										<div class="col-md-6">
+
+											<div class="box-body ">
+												<div class="form-group #{nameIt1.valid ? '' :'has-error'}">
+													<label for="nameIt1">First Name </label>
+													<h:inputText required="true" binding="#{nameIt1}"
+														requiredMessage="Please enter name"
+														class="form-control" id="nameIt1" immediate="true"
+														a:placeholder="First Name" autocomplete="off"
+														value="">
+														<f:ajax event="keyup" render="nameMsg1" />
+													</h:inputText>
+													<h:message id="nameMsg1" for="nameIt1" style="color:red;" />
+												</div>
+												<div class="form-group #{nameIt.valid ? '' :'has-error'}">
+													<label for="nameIt">Last Name </label>
+													<h:inputText required="true" binding="#{nameIt}"
+														requiredMessage="Please enter last name"
+														class="form-control" id="nameIt" immediate="true"
+														a:placeholder="Last Name" autocomplete="off"
+														value="">
+														<f:ajax event="keyup" render="nameMsg" />
+													</h:inputText>
+													<h:message id="nameMsg" for="nameIt" style="color:red;" />
+												</div>
+
+												<div class="form-group #{emailIt.valid ? '' :'has-error'}">
+													<label for="emailIt">Contact Number </label>
+													<h:inputText required="true" binding="#{emailIt}"
+														requiredMessage="Please enter the e-service email"
+														class="form-control" id="emailIt" immediate="true"
+														a:placeholder="Contact Number" autocomplete="off"
+														value="">
+														<f:ajax event="keyup" render="emailMsg" />
+													</h:inputText>
+													<h:message id="emailMsg" for="emailIt" style="color:red;" />
+												</div>
+											</div>
+											<!-- /.box-body -->
+											<!-- END new form -->
+										</div>
+										<!-- END new col -->
+
+										<!-- new col2 start -->
+										<div class="col-md-6">
+
+											<div class="box-body">
+												<div
+													class="form-group #{descriptionIt.valid?'':'has-error'}">
+													<label for="nameIt">Address </label>
+													<h:inputText required="true" binding="#{descriptionIt}"
+														requiredMessage="Please enter the e-service description"
+														class="form-control" id="descriptionIt" immediate="true"
+														a:placeholder="Address" autocomplete="off"
+														 value="">
+														<f:ajax event="keyup" render="descriptionMsg" />
+													</h:inputText>
+													<h:message id="descriptionMsg" for="descriptionIt"
+														style="color:red;" />
+												</div>
+												<div class="form-group #{cellHomeIt.valid?'':'has-error'}">
+													<label for="cellHomeIt">Email Address </label>
+													<h:inputText required="true" binding="#{cellHomeIt}"
+														requiredMessage="Please enter the e-service link"
+														class="form-control" id="cellHomeIt" immediate="true"
+														a:placeholder="Email Address" autocomplete="off"
+														value="">
+														<f:ajax event="keyup" render="cellHomeMsg" />
+													</h:inputText>
+													<h:message id="cellHomeMsg" for="cellHomeIt"
+														style="color:red;" />
+												</div>
+												<h:commandLink validateClient="true" update="updateFrm msg"
+													action="#{eventController.update}"
+													styleClass="btn btn-warning pull-right margin">
+													<span><i class="fa fa-refresh" aria-hidden="true"></i>
+														Update </span>
+													<f:ajax render="@form" />
+												</h:commandLink>
+											</div>
+											<!-- /.box-body -->
+										</div>
+										<!-- END new col2 -->
+									</div>
+									<!-- END new row -->
+								</div>
+								<!-- /.box -->
+							</div>
+							<!-- END.col -->
+						</div>
+						<!-- end row -->
+					</h:form>
+					<!-- END form -->
+				</section>
+		
+
+		
+
+	</div>
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<strong>Copyright &copy; 2018 South Africa. All Rights
+				Reserved. Powered by <a href="https://iqbusiness.net"
+				target="_blank">IQ Business</a>
+			</strong>
+		</div>
+		<!-- /.container -->
+	</footer>
+
+	<!-- Bootstrap core JavaScript -->
+	<script
+		src="#{request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+	<script
+		src="#{request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+		$(function() {
+			//$("#attachmentDt").DataTable();
+			$('#employeeDt').DataTable({
+				"paging" : true,
+				"lengthChange" : true,
+				"searching" : true,
+				"ordering" : true,
+				"info" : true,
+				"autoWidth" : true
+			});
+		});
+	</script>
+
+</h:body>
+
+
+</html>
